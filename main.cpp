@@ -66,6 +66,14 @@ public:
         return *this;
     }
 
+    RationalNumber& operator/(RationalNumber& other) {
+        this->numerator *= other.denominator;
+        this->denominator *= other.numerator;
+        this->normalize();
+
+        return *this;
+    }
+
     string toString() const {
         string output = to_string(this->numerator) + "/" + to_string(this->denominator);
         return output;
@@ -121,6 +129,8 @@ int main() {
     cout << rn2.toString() << endl;
 
     rn1 * rn2;
+    cout << rn1.toString() << endl;
+    rn1 / rn2;
     cout << rn1.toString() << endl;
 
 //    int input = 0;
