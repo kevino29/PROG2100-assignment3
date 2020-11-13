@@ -50,9 +50,20 @@ public:
     }
 
     void normalize() {
-        if (this->denominator == 1)
+        if (this->denominator != 1 || this->denominator != 0) {
+            int gcf = getGCF(this->numerator, this->denominator);
 
-        int gcf = getGCF(this->numerator, this->denominator);
+            this->numerator /= gcf;
+            this->denominator /= gcf;
+        }
+    }
+
+    RationalNumber& operator*(RationalNumber& other) {
+        this->numerator *= other.numerator;
+        this->denominator *= other.denominator;
+        this->normalize();
+
+        return *this;
     }
 
     string toString() const {
@@ -97,26 +108,34 @@ public:
 };
 
 int main() {
-    string rationalNumber = "4338/12";
-    RationalNumber rn(rationalNumber);
+    string rationalNumber1 = "4338/12";
+    string rationalNumber2 = "234/56";
+    RationalNumber rn1(rationalNumber1);
+    RationalNumber rn2(rationalNumber2);
 
-    cout << rn.toString() << endl;
+    cout << rn1.toString() << endl;
+    cout << rn2.toString() << endl;
+    rn1.normalize();
+    rn2.normalize();
+    cout << rn1.toString() << endl;
+    cout << rn2.toString() << endl;
 
-    cout << RationalNumber::getGCF(rn.getNumerator(), rn.getDenominator()) << endl;
+    rn1 * rn2;
+    cout << rn1.toString() << endl;
 
-    int input = 0;
-    while (true) {
-        // source: https://stackoverflow.com/questions/16934183/integer-validation-for-input
-        cout << "Enter an integer: " << endl;
-        cin >> input;
-
-        if (cin.good())
-            break;
-        else {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(),'\n');
-            cout << "Invalid input. Please try again." << endl;
-        }
-    }
+//    int input = 0;
+//    while (true) {
+//        // source: https://stackoverflow.com/questions/16934183/integer-validation-for-input
+//        cout << "Enter an integer: " << endl;
+//        cin >> input;
+//
+//        if (cin.good())
+//            break;
+//        else {
+//            cin.clear();
+//            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+//            cout << "Invalid input. Please try again." << endl;
+//        }
+//    }
     return 0;
 }
