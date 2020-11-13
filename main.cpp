@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <limits>
 
 using namespace std;
 
@@ -15,7 +16,7 @@ public:
         this->denominator = 1;
     }
 
-    RationalNumber(int numerator) {
+    explicit RationalNumber(int numerator) {
         this->numerator = numerator;
         this->denominator = 1;
     }
@@ -25,9 +26,11 @@ public:
         this->denominator = denominator;
     }
 
-    RationalNumber(string& rationalNumber) {
+    explicit RationalNumber(string& rationalNumber) {
         vector<string> numbers = parseString(rationalNumber);
 
+        this->numerator = stoi(numbers[0]);
+        this->denominator = stoi(numbers[1]);
     }
 
     int getNumerator() const {
@@ -46,9 +49,35 @@ public:
         this->denominator = denominator;
     }
 
+    void normalize() {
+        if (this->denominator == 1)
+
+        int gcf = getGCF(this->numerator, this->denominator);
+    }
+
     string toString() const {
         string output = to_string(this->numerator) + "/" + to_string(this->denominator);
         return output;
+    }
+
+    static int getGCF(int num1, int num2) {
+        int lowerNum = 0;
+        int gcf = 1;
+
+        if (num2 > num1)
+            lowerNum = num1;
+        else if (num1 > num2)
+            lowerNum = num2;
+        else
+            lowerNum = num1;
+
+        for (int i = lowerNum; i > 1; i--) {
+            if (num1 % i == 0 && num2 % i == 0) {
+                gcf = i;
+                break;
+            }
+        }
+        return gcf;
     }
 
     static vector<string> parseString(string& rationalNumber) {
@@ -68,9 +97,26 @@ public:
 };
 
 int main() {
-    string rationalNumber = "34/2";
+    string rationalNumber = "4338/12";
     RationalNumber rn(rationalNumber);
 
     cout << rn.toString() << endl;
+
+    cout << RationalNumber::getGCF(rn.getNumerator(), rn.getDenominator()) << endl;
+
+    int input = 0;
+    while (true) {
+        // source: https://stackoverflow.com/questions/16934183/integer-validation-for-input
+        cout << "Enter an integer: " << endl;
+        cin >> input;
+
+        if (cin.good())
+            break;
+        else {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            cout << "Invalid input. Please try again." << endl;
+        }
+    }
     return 0;
 }
