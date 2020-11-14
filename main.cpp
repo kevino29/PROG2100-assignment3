@@ -18,18 +18,21 @@ public:
         this->numerator = 0;
         this->denominator = 1;
         isZero = checkForNumerator();
+        cout << "Default constructor fired!!!" << endl;
     }
 
     explicit RationalNumber(int numerator) {
         this->numerator = numerator;
         this->denominator = 1;
         isZero = checkForNumerator();
+        cout << "Constructor with one int parameter fired!!!" << endl;
     }
 
     RationalNumber(int numerator, int denominator) {
         this->numerator = numerator;
         this->denominator = denominator;
         isZero = checkForNumerator();
+        cout << "Constructor with two int parameters fired!!!" << endl;
     }
 
     explicit RationalNumber(string& rationalNumber) {
@@ -39,6 +42,7 @@ public:
         this->denominator = stoi(numbers[1]);
 
         isZero = checkForNumerator();
+        cout << "Constructor with one string parameter fired!!!" << endl;
     }
 
     int getNumerator() const {
@@ -82,6 +86,7 @@ public:
         this->normalize();
         this->isZero = this->checkForNumerator();
 
+        cout << "Overloaded * operator fired!!!" << endl;
         return *this;
     }
 
@@ -97,6 +102,7 @@ public:
             this->denominator = 1;
             this->isZero = this->checkForNumerator();
         }
+        cout << "Overloaded / operator fired!!!" << endl;
         return *this;
     }
 
