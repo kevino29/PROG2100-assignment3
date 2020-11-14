@@ -38,6 +38,11 @@ public:
     explicit RationalNumber(string& rationalNumber) {
         vector<string> numbers = parseString(rationalNumber);
 
+        if (!isInteger(numbers[0]))
+            throw exception();
+        if (!isInteger(numbers[1]))
+            throw exception();
+
         this->numerator = stoi(numbers[0]);
         this->denominator = stoi(numbers[1]);
 
@@ -80,6 +85,11 @@ public:
             return false;
     }
 
+    string toString() const {
+        string output = to_string(this->numerator) + "/" + to_string(this->denominator);
+        return output;
+    }
+
     RationalNumber& operator*(RationalNumber& other) {
         this->numerator *= other.numerator;
         this->denominator *= other.denominator;
@@ -106,11 +116,6 @@ public:
         return *this;
     }
 
-    string toString() const {
-        string output = to_string(this->numerator) + "/" + to_string(this->denominator);
-        return output;
-    }
-
     static int getGCF(int num1, int num2) {
         int lowerNum = 0;
         int gcf = 1;
@@ -129,6 +134,17 @@ public:
             }
         }
         return gcf;
+    }
+
+    static bool isInteger(string& input) {
+        //source: https://www.programiz.com/cpp-programming/library-function/cctype/isdigit
+        for (char c : input) {
+            if (c == '-' || c == '+')
+                continue;
+            else if (!isdigit(c))
+                return false;
+        }
+        return true;
     }
 
     static vector<string> parseString(string& rationalNumber) {
@@ -155,6 +171,16 @@ void program() {
     cin >> input;
 
     numbers = RationalNumber::parseString(input);
+
+    if (numbers.size() == 1) { // this means that the user gave a whole number
+        try {
+            string sample = "4532";
+            RationalNumber rn1(sample);
+        }
+        catch (exception& e) {
+
+        }
+    }
 }
 
 int main() {
