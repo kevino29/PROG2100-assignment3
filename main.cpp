@@ -210,6 +210,16 @@ void program() {
 
         break;
     }
+
+    // add both rational numbers together
+
+    // subtract both rational numbers
+
+    // multiply both rational numbers
+
+    // divide both rational numbers
+
+
 }
 
 int main() {
