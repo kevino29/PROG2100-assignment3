@@ -166,20 +166,49 @@ public:
 void program() {
     string input;
     vector<string> numbers;
+    RationalNumber rn1;
+    RationalNumber rn2;
 
-    cout << "Enter first fraction: " << endl;
-    cin >> input;
+    while (true) { //gets the first rational number
+        cout << "Enter first fraction: " << endl;
+        cin >> input;
 
-    numbers = RationalNumber::parseString(input);
+        numbers = RationalNumber::parseString(input);
 
-    if (numbers.size() == 1) { // this means that the user gave a whole number
-        try {
-            string sample = "4532";
-            RationalNumber rn1(sample);
+        if (numbers.size() == 1) { // this means that the user gave a whole number
+            if (!RationalNumber::isInteger(numbers[0])) //checks if the input is an integer
+                continue;
+            int num = stoi(numbers[0]);
+            rn1 = RationalNumber(num);
         }
-        catch (exception& e) {
-
+        else { // this means that the user gave a fraction
+            if (!RationalNumber::isInteger(numbers[0]) || !RationalNumber::isInteger(numbers[1]))
+                continue; //checks if the two numbers are integers
+            rn1 = RationalNumber(stoi(numbers[0]), stoi(numbers[1]));
         }
+        break;
+    }
+
+    while (true) { //gets the second rational number
+        cout << "Enter second fraction: " << endl;
+        cin >> input;
+        string rn = input;
+
+        numbers = RationalNumber::parseString(input);
+
+        if (numbers.size() == 1) { // this means that the user gave a whole number
+            if (!RationalNumber::isInteger(numbers[0])) //checks if the input is an integer
+                continue;
+            int num = stoi(numbers[0]);
+            rn1 = RationalNumber(num);
+        }
+        else {
+            if (!RationalNumber::isInteger(numbers[0]) || !RationalNumber::isInteger(numbers[1]))
+                continue; //checks if the two numbers are integers
+            rn1 = RationalNumber(rn);
+        }
+
+        break;
     }
 }
 
