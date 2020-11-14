@@ -11,19 +11,25 @@ private:
     int denominator;
 
 public:
+    bool isZero;
+
+public:
     RationalNumber() {
         this->numerator = 0;
         this->denominator = 1;
+        isZero = checkForNumerator();
     }
 
     explicit RationalNumber(int numerator) {
         this->numerator = numerator;
         this->denominator = 1;
+        isZero = checkForNumerator();
     }
 
     RationalNumber(int numerator, int denominator) {
         this->numerator = numerator;
         this->denominator = denominator;
+        isZero = checkForNumerator();
     }
 
     explicit RationalNumber(string& rationalNumber) {
@@ -31,6 +37,8 @@ public:
 
         this->numerator = stoi(numbers[0]);
         this->denominator = stoi(numbers[1]);
+
+        isZero = checkForNumerator();
     }
 
     int getNumerator() const {
@@ -39,6 +47,7 @@ public:
 
     void setNumerator(int numerator) {
         this->numerator = numerator;
+        isZero = checkForNumerator();
     }
 
     int getDenominator() const {
@@ -55,22 +64,39 @@ public:
 
             this->numerator /= gcf;
             this->denominator /= gcf;
+
+            isZero = checkForNumerator();
         }
+    }
+
+    bool checkForNumerator() const {
+        if (this->numerator == 0)
+            return true;
+        else
+            return false;
     }
 
     RationalNumber& operator*(RationalNumber& other) {
         this->numerator *= other.numerator;
         this->denominator *= other.denominator;
         this->normalize();
+        this->isZero = this->checkForNumerator();
 
         return *this;
     }
 
     RationalNumber& operator/(RationalNumber& other) {
-        this->numerator *= other.denominator;
-        this->denominator *= other.numerator;
-        this->normalize();
-
+        if (!other.isZero) { // check if we are dividing by zero
+            this->numerator *= other.denominator;
+            this->denominator *= other.numerator;
+            this->normalize();
+            this->isZero = this->checkForNumerator();
+        }
+        else { // if we are dividing by zero, we set the operator caller object to zero
+            this->numerator = 0;
+            this->denominator = 1;
+            this->isZero = this->checkForNumerator();
+        }
         return *this;
     }
 
