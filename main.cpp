@@ -141,23 +141,29 @@ public:
     }
 };
 
+void program() {
+    string input;
+    vector<string> numbers;
+
+    cout << "Enter first fraction: " << endl;
+    cin >> input;
+
+    numbers = RationalNumber::parseString(input);
+}
+
 int main() {
-    string rationalNumber1 = "4338/12";
-    string rationalNumber2 = "234/56";
-    RationalNumber rn1(rationalNumber1);
-    RationalNumber rn2(rationalNumber2);
+    string input;
 
-    cout << rn1.toString() << endl;
-    cout << rn2.toString() << endl;
-    rn1.normalize();
-    rn2.normalize();
-    cout << rn1.toString() << endl;
-    cout << rn2.toString() << endl;
+    while (true) {
+        program();
+        cout << "Try again? (y or n)" << endl;
+        cin >> input;
 
-    rn1 * rn2;
-    cout << rn1.toString() << endl;
-    rn1 / rn2;
-    cout << rn1.toString() << endl;
+        if (input == "n")
+            break;
+        else
+            cout << endl;
+    }
 
 //    int input = 0;
 //    while (true) {
