@@ -69,7 +69,13 @@ public:
 
     void normalize() {
         if (this->denominator != 1 || this->denominator != 0) {
-            int gcf = getGCF(this->numerator, this->denominator);
+            if ((this->denominator < 0 && this->numerator < 0) ||  // checks if both numbers are negative, turns both to positive.
+                (this->denominator < 0 && this->numerator >= 0)) { // checks if denominator is negative and numerator is positive,
+                this->numerator *= -1;                             // I will switch the signs so that the numerator is negative,
+                this->denominator *= -1;                           // and the denominator is always positive.
+            }
+
+            int gcf = getGCF();
 
             this->numerator /= gcf;
             this->denominator /= gcf;
@@ -85,9 +91,36 @@ public:
             return false;
     }
 
+    int getGCF() {
+        int lowerNum = 0;
+        int gcf = 1;
+
+        if (this->numerator > this->denominator)
+            lowerNum = this->denominator;
+        else if (this->denominator > this->numerator)
+            lowerNum = this->numerator;
+        else
+            lowerNum = this->numerator;
+
+        for (int i = lowerNum; i > 1; i--) {
+            if (this->numerator % i == 0 && this->denominator % i == 0) {
+                gcf = i;
+                break;
+            }
+        }
+        return gcf;
+    }
+
     string toString() const {
         string output = to_string(this->numerator) + "/" + to_string(this->denominator);
         return output;
+    }
+
+    RationalNumber& operator+(RationalNumber& other) {
+        int lcd = getLCD(this->denominator, other.denominator);
+
+
+        return *this;
     }
 
     RationalNumber& operator*(RationalNumber& other) {
@@ -116,25 +149,7 @@ public:
         return *this;
     }
 
-    static int getGCF(int num1, int num2) {
-        int lowerNum = 0;
-        int gcf = 1;
-
-        if (num2 > num1)
-            lowerNum = num1;
-        else if (num1 > num2)
-            lowerNum = num2;
-        else
-            lowerNum = num1;
-
-        for (int i = lowerNum; i > 1; i--) {
-            if (num1 % i == 0 && num2 % i == 0) {
-                gcf = i;
-                break;
-            }
-        }
-        return gcf;
-    }
+    friend ostream& operator<<(ostream& os, RationalNumber& rn);
 
     static bool isInteger(string& input) {
         //source: https://www.programiz.com/cpp-programming/library-function/cctype/isdigit
@@ -145,6 +160,31 @@ public:
                 return false;
         }
         return true;
+    }
+
+    static int getLCD(int denominator1, int denominator2) {
+        int higherNum = 0;
+        int lowerNum = 0;
+        int lcd = 1;
+
+        if (denominator1 < denominator2) {
+            higherNum = denominator2;
+            lowerNum = denominator1;
+        }
+        else if (denominator2 < denominator1) {
+            higherNum = denominator1;
+            lowerNum = denominator2;
+        }
+        else
+            higherNum = denominator1;
+
+        for (int i = higherNum; i <= denominator1*denominator2; i++) {
+            if ((i % higherNum == 0) && (i % lowerNum == 0)) {
+                lcd = i;
+                break;
+            }
+        }
+        return lcd;
     }
 
     static vector<string> parseString(string& rationalNumber) {
@@ -162,6 +202,11 @@ public:
         return parsedString;
     }
 };
+
+ostream& operator<<(ostream& os, RationalNumber& rn) {
+    os << rn.toString() << endl;
+    return os;
+}
 
 void program() {
     string input;
@@ -212,6 +257,8 @@ void program() {
     }
 
     // add both rational numbers together
+    rn1 + rn2;
+    cout << rn1 << endl;
 
     // subtract both rational numbers
 
@@ -219,22 +266,28 @@ void program() {
 
     // divide both rational numbers
 
-
 }
 
 int main() {
-    string input;
+//    string input;
+//
+//    while (true) {
+//        program();
+//        cout << "Try again? (y or n)" << endl;
+//        cin >> input;
+//
+//        if (input == "n")
+//            break;
+//        else
+//            cout << endl;
+//    }
 
-    while (true) {
-        program();
-        cout << "Try again? (y or n)" << endl;
-        cin >> input;
+    int i = 6;
+    int j = 3;
 
-        if (input == "n")
-            break;
-        else
-            cout << endl;
-    }
+    int k = RationalNumber::getLCD(i, j);
+
+    cout << k << endl;
 
 //    int input = 0;
 //    while (true) {
