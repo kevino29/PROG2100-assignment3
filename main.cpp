@@ -264,6 +264,7 @@ ostream& operator<<(ostream& os, RationalNumber& rn) {
 void program() {
     string input;
     vector<string> numbers;
+    bool boolean;
     RationalNumber rn1;
     RationalNumber rn2;
     RationalNumber rn3; // A copy of rn1, mainly used to do math with
@@ -307,7 +308,6 @@ void program() {
                 continue; //checks if the two numbers are integers
             rn2 = RationalNumber(rn);
         }
-
         break;
     }
 
@@ -337,6 +337,19 @@ void program() {
     rn4 = rn2;
     rn3 / rn4;
     cout << rn1 << " / " << rn2 << " = " << rn3 << "\n" << endl;
+
+    cout << boolalpha;
+    // check if first rational number is greater than the second
+    boolean = rn1 > rn2;
+    cout << rn1 << " > " << rn2 << " : " << boolean << "\n" << endl;
+
+    // check if first rational number is less than the second
+    boolean = rn1 < rn2;
+    cout << rn1 << " < " << rn2 << " : " << boolean << "\n" << endl;
+
+    // check if first rational number is to the second
+    boolean = rn1 == rn2;
+    cout << rn1 << " == " << rn2 << " : " << boolean << "\n" << endl;
 }
 
 int main() {
