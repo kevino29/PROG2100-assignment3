@@ -140,6 +140,12 @@ public:
     RationalNumber& operator-(RationalNumber& other) {
         int lcd = getLCD(this->denominator, other.denominator);
 
+        this->numerator = this->numerator * lcd / this->denominator;
+        other.numerator = other.numerator * lcd / other.denominator;
+
+        this->denominator = lcd;
+        other.denominator = lcd;
+
         this->numerator -= other.numerator;
 
         this->normalize();
@@ -165,10 +171,8 @@ public:
             this->normalize();
             this->isZero = this->checkForNumerator();
         }
-        else { // if we are dividing by zero, we set the operator caller object to zero
-            this->numerator = 0;
-            this->denominator = 1;
-            this->isZero = this->checkForNumerator();
+        else {
+            cout << "Division by zero." << endl;
         }
         cout << "Overloaded / operator fired!!!" << endl;
         return *this;
@@ -307,14 +311,14 @@ int main() {
 //            cout << endl;
 //    }
 
-    string rn = "1/-3";
+    string rn = "3/-5";
     RationalNumber rn1(rn);
-    RationalNumber rn2(2, 5);
+    RationalNumber rn2(0);
 
     cout << rn1 << endl;
     cout << rn2 << endl;
 
-    rn1 + rn2;
+    rn1 / rn2;
     cout << rn1 << endl;
 
 //    int i = 14;
