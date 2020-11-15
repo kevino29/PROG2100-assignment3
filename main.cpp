@@ -37,6 +37,7 @@ public:
     explicit RationalNumber(string& rationalNumber) {
         vector<string> numbers = parseString(rationalNumber);
 
+        // validate the input
         if (!isInteger(numbers[0]))
             throw exception();
         if (!isInteger(numbers[1]))
@@ -75,6 +76,7 @@ public:
         this->denominator = denominator;
     }
 
+    /// Normalizes/Reduces the rational number.
     void normalize() {
         if (this->denominator != 1 || this->denominator != 0) {
             if ((this->denominator < 0 && this->numerator < 0) ||  // checks if both numbers are negative, turns both to positive.
@@ -84,6 +86,7 @@ public:
             }
 
             int gcf = getGCF();
+            to_string(gcf);
 
             this->numerator /= gcf;
             this->denominator /= gcf;
@@ -92,6 +95,9 @@ public:
         }
     }
 
+    /// Checks if the numerator is zero.
+    /// \return True if the numerator is zero.
+    /// \return False if the numerator is not zero.
     bool checkForNumerator() const {
         if (this->numerator == 0)
             return true;
@@ -99,12 +105,14 @@ public:
             return false;
     }
 
+    /// Gets the Greatest Common Factor of the rational number.
+    /// \return GCF as an integer.
     int getGCF() {
         int lowerNum = 0;
         int gcf = 1;
         int absoluteNumerator; // absolute value of numerator
 
-        if (this->numerator < 0)
+        if (this->numerator < 0) // since only the numerator will be negative, we will only get the absolute value of numerator.
             absoluteNumerator = this->numerator * -1;
         else
             absoluteNumerator = this->numerator;
@@ -125,6 +133,8 @@ public:
         return gcf;
     }
 
+    /// Gets the rational number as a string.
+    /// \return Rational number as a string.
     string toString() const {
         if (this->isZero)
             return to_string(this->numerator);
@@ -141,7 +151,7 @@ public:
     RationalNumber& operator+(RationalNumber& other) {
         int lcd = 1;
 
-        if (this->denominator != other.getDenominator()) {
+        if (this->denominator != other.getDenominator()) { // we need to get lcd if the denominators are not the same
             lcd = getLCD(this->denominator, other.denominator);
 
             this->numerator = this->numerator * lcd / this->denominator;
@@ -162,7 +172,7 @@ public:
     RationalNumber& operator-(RationalNumber& other) {
         int lcd = 1;
 
-        if (this->denominator != other.getDenominator()) {
+        if (this->denominator != other.getDenominator()) { // we need to get lcd if the denominators are not the same
             lcd = getLCD(this->denominator, other.denominator);
 
             this->numerator = this->numerator * lcd / this->denominator;
@@ -211,6 +221,9 @@ public:
     friend bool operator<(RationalNumber rn1, RationalNumber rn2);
     friend ostream& operator<<(ostream& os, RationalNumber& rn);
 
+    /// Checks if the value is an integer.
+    /// \return True if the value is an integer.
+    /// \return False if the value is not an integer.
     static bool isInteger(string& input) {
         //source: https://www.programiz.com/cpp-programming/library-function/cctype/isdigit
         for (char c : input) {
@@ -222,6 +235,8 @@ public:
         return true;
     }
 
+    /// Gets the Least Common Denominator of two denominator values.
+    /// \return The LCD as an integer.
     static int getLCD(int denominator1, int denominator2) {
         int higherNum = 0;
         int lowerNum = 0;
@@ -247,6 +262,8 @@ public:
         return lcd;
     }
 
+    /// Parses the string into a vector of string.
+    /// \return The parsed string as a string vector.
     static vector<string> parseString(string& rationalNumber) {
         // source: https://stackoverflow.com/questions/14265581/parse-split-a-string-in-c-using-string-delimiter-standard-c
         vector<string> parsedString;
@@ -330,7 +347,13 @@ void program() {
                 continue; // checks if the two numbers are integers
             if (stoi(numbers[1]) == 0)
                 continue; // checks if the denominator is zero
-            rn2 = RationalNumber(rn);
+
+            try { // it will throw an exception if this fails
+                rn2 = RationalNumber(rn);
+            }
+            catch (exception& e) {
+                cout << "Unexpected exception. Please try again." << endl;
+            }
         }
         break;
     }
