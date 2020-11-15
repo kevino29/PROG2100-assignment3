@@ -179,6 +179,7 @@ public:
     }
 
     bool operator==(RationalNumber& other) const {
+        cout << "Overloaded == operator fired!!!" << endl;
         return ((this->numerator == other.getNumerator()) && (this->denominator == other.getDenominator()));
     }
 
@@ -240,16 +241,19 @@ public:
 
 bool operator>(RationalNumber rn1, RationalNumber rn2) {
     rn1 - rn2;
+    cout << "Overloaded > operator fired!!!" << endl;
     return (rn1.getNumerator() > 0);
 }
 
 bool operator<(RationalNumber rn1, RationalNumber rn2) {
     rn1 - rn2;
+    cout << "Overloaded < operator fired!!!" << endl;
     return (rn1.getNumerator() < 0);
 }
 
 ostream& operator<<(ostream& os, RationalNumber& rn) {
-    os << rn.toString() << endl;
+    cout << "Overloaded << operator fired!!!" << endl;
+    os << rn.toString();
     return os;
 }
 
@@ -302,10 +306,12 @@ void program() {
     }
 
     // add both rational numbers together
-    rn1 + rn2;
-    cout << rn1 << endl;
+    cout << "Rational Number 1: " << rn1 << endl;
+    cout << "Rational Number 2: " << rn2 << endl;
+    cout << rn1 << " + " << rn2 << " = " << rn1 + rn2 << endl;
 
     // subtract both rational numbers
+
 
     // multiply both rational numbers
 
@@ -314,28 +320,33 @@ void program() {
 }
 
 int main() {
-//    string input;
+    string input;
+
+    while (true) {
+        program();
+        cout << "Try again? (y or n)" << endl;
+        cin >> input;
+
+        if (input == "n")
+            break;
+        else
+            cout << endl;
+    }
+
+//    string rn = "1/2";
+//    RationalNumber rn1(rn);
+//    RationalNumber rn2(3, 7);
 //
-//    while (true) {
-//        program();
-//        cout << "Try again? (y or n)" << endl;
-//        cin >> input;
+//    cout << rn1 << endl;
+//    cout << rn2 << endl;
 //
-//        if (input == "n")
-//            break;
-//        else
-//            cout << endl;
-//    }
-
-    string rn = "-2/-4";
-    RationalNumber rn1(rn);
-    RationalNumber rn2(0);
-
-    cout << rn1 << endl;
-    cout << rn2 << endl;
-
-    rn1 / rn2;
-    cout << rn1 << endl;
+////    rn1 / rn2;
+////    cout << rn1 << endl;
+//
+//    if (rn1 > rn2)
+//        cout << rn1 << " is greater than " << rn2 << endl;
+//    else
+//        cout << rn2 << " is greater than " << rn1 << endl;
 
 //    int i = 14;
 //    int j = 3;
