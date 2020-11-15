@@ -252,7 +252,6 @@ bool operator<(RationalNumber rn1, RationalNumber rn2) {
 }
 
 ostream& operator<<(ostream& os, RationalNumber& rn) {
-    cout << "Overloaded << operator fired!!!" << endl;
     os << rn.toString();
     return os;
 }
@@ -294,12 +293,12 @@ void program() {
             if (!RationalNumber::isInteger(numbers[0])) //checks if the input is an integer
                 continue;
             int num = stoi(numbers[0]);
-            rn1 = RationalNumber(num);
+            rn2 = RationalNumber(num);
         }
         else {
             if (!RationalNumber::isInteger(numbers[0]) || !RationalNumber::isInteger(numbers[1]))
                 continue; //checks if the two numbers are integers
-            rn1 = RationalNumber(rn);
+            rn2 = RationalNumber(rn);
         }
 
         break;
