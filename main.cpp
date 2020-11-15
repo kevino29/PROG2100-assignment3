@@ -288,6 +288,7 @@ void program() {
     RationalNumber rn2;
     RationalNumber rn3; // A copy of rn1, mainly used to do math with
     RationalNumber rn4; // A copy of rn2, mainly used to do math with
+    cout << endl; //line break
 
     while (true) { //gets the first rational number
         cout << "Enter first fraction: " << endl;
