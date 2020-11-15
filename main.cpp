@@ -102,16 +102,22 @@ public:
     int getGCF() {
         int lowerNum = 0;
         int gcf = 1;
+        int absoluteNumerator; // absolute value of numerator
 
-        if (this->numerator > this->denominator)
-            lowerNum = this->denominator;
-        else if (this->denominator > this->numerator)
-            lowerNum = this->numerator;
+        if (this->numerator < 0)
+            absoluteNumerator = this->numerator * -1;
         else
-            lowerNum = this->numerator;
+            absoluteNumerator = this->numerator;
+
+        if (absoluteNumerator > this->denominator)
+            lowerNum = this->denominator;
+        else if (this->denominator > absoluteNumerator)
+            lowerNum = absoluteNumerator;
+        else
+            lowerNum = absoluteNumerator;
 
         for (int i = lowerNum; i > 1; i--) {
-            if (this->numerator % i == 0 && this->denominator % i == 0) {
+            if (absoluteNumerator % i == 0 && this->denominator % i == 0) {
                 gcf = i;
                 break;
             }
