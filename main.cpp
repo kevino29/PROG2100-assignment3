@@ -17,7 +17,6 @@ public:
     RationalNumber() {
         this->numerator = 0;
         this->denominator = 1;
-        isZero = checkForNumerator();
         this->normalize();
         cout << "Default constructor fired!!!" << endl;
     }
@@ -25,17 +24,15 @@ public:
     explicit RationalNumber(int numerator) {
         this->numerator = numerator;
         this->denominator = 1;
-        isZero = checkForNumerator();
         this->normalize();
-        cout << "Constructor with one int parameter fired!!!" << endl;
+        cout << "Constructor with one int parameter fired!!!" << "\n" << endl;
     }
 
     RationalNumber(int numerator, int denominator) {
         this->numerator = numerator;
         this->denominator = denominator;
-        isZero = checkForNumerator();
         this->normalize();
-        cout << "Constructor with two int parameters fired!!!" << endl;
+        cout << "Constructor with two int parameters fired!!!" << "\n" << endl;
     }
 
     explicit RationalNumber(string& rationalNumber) {
@@ -49,9 +46,17 @@ public:
         this->numerator = stoi(numbers[0]);
         this->denominator = stoi(numbers[1]);
 
-        isZero = checkForNumerator();
         this->normalize();
-        cout << "Constructor with one string parameter fired!!!" << endl;
+        cout << "Constructor with one string parameter fired!!!" << "\n" << endl;
+    }
+
+    RationalNumber& operator=(RationalNumber const& other) {
+        if (&other != this) {
+            this->numerator = other.getNumerator();
+            this->denominator = other.getDenominator();
+            this->normalize();
+        }
+        return *this;
     }
 
     int getNumerator() const {
@@ -261,6 +266,8 @@ void program() {
     vector<string> numbers;
     RationalNumber rn1;
     RationalNumber rn2;
+    RationalNumber rn3; // A copy of rn1, mainly used to do math with
+    RationalNumber rn4; // A copy of rn2, mainly used to do math with
 
     while (true) { //gets the first rational number
         cout << "Enter first fraction: " << endl;
@@ -304,18 +311,32 @@ void program() {
         break;
     }
 
-    // add both rational numbers together
     cout << "Rational Number 1: " << rn1 << endl;
-    cout << "Rational Number 2: " << rn2 << endl;
-    cout << rn1 << " + " << rn2 << " = " << rn1 + rn2 << endl;
+    cout << "Rational Number 2: " << rn2 << "\n" << endl;
+
+    // add both rational numbers together
+    rn3 = rn1;
+    rn4 = rn2;
+    rn3 + rn4;
+    cout << rn1 << " + " << rn2 << " = " << rn3 << "\n" << endl;
 
     // subtract both rational numbers
-
+    rn3 = rn1;
+    rn4 = rn2;
+    rn3 - rn4;
+    cout << rn1 << " - " << rn2 << " = " << rn3 << "\n" << endl;
 
     // multiply both rational numbers
+    rn3 = rn1;
+    rn4 = rn2;
+    rn3 * rn4;
+    cout << rn1 << " * " << rn2 << " = " << rn3 << "\n" << endl;
 
     // divide both rational numbers
-
+    rn3 = rn1;
+    rn4 = rn2;
+    rn3 / rn4;
+    cout << rn1 << " / " << rn2 << " = " << rn3 << "\n" << endl;
 }
 
 int main() {
