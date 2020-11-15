@@ -212,6 +212,27 @@ public:
         return *this;
     }
 
+    RationalNumber& operator+=(RationalNumber& other) {
+        int lcd = 1;
+
+        if (this->denominator != other.getDenominator()) { // we need to get lcd if the denominators are not the same
+            lcd = getLCD(this->denominator, other.denominator);
+
+            this->numerator = this->numerator * lcd / this->denominator;
+            other.numerator = other.numerator * lcd / other.denominator;
+
+            this->denominator = lcd;
+            other.denominator = lcd;
+        }
+
+        this->numerator += other.numerator;
+
+        this->normalize();
+        other.normalize();
+        cout << "Overloaded += operator fired!!!" << endl;
+        return *this;
+    }
+
     bool operator==(RationalNumber& other) const {
         cout << "Overloaded == operator fired!!!" << endl;
         return ((this->numerator == other.getNumerator()) && (this->denominator == other.getDenominator()));
@@ -384,6 +405,12 @@ void program() {
     rn4 = rn2;
     rn3 / rn4;
     cout << rn1 << " / " << rn2 << " = " << rn3 << "\n" << endl;
+
+    // plus equals rn1 and rn2
+    rn3 = rn1;
+    rn4 = rn2;
+    rn3 += rn4;
+    cout << rn1 << " += " << rn2 << " is " << rn3 << "\n" << endl;
 
     cout << boolalpha;
 
