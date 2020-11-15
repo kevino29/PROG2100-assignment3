@@ -18,6 +18,7 @@ public:
         this->numerator = 0;
         this->denominator = 1;
         isZero = checkForNumerator();
+        this->normalize();
         cout << "Default constructor fired!!!" << endl;
     }
 
@@ -25,6 +26,7 @@ public:
         this->numerator = numerator;
         this->denominator = 1;
         isZero = checkForNumerator();
+        this->normalize();
         cout << "Constructor with one int parameter fired!!!" << endl;
     }
 
@@ -32,6 +34,7 @@ public:
         this->numerator = numerator;
         this->denominator = denominator;
         isZero = checkForNumerator();
+        this->normalize();
         cout << "Constructor with two int parameters fired!!!" << endl;
     }
 
@@ -47,6 +50,7 @@ public:
         this->denominator = stoi(numbers[1]);
 
         isZero = checkForNumerator();
+        this->normalize();
         cout << "Constructor with one string parameter fired!!!" << endl;
     }
 
@@ -119,7 +123,28 @@ public:
     RationalNumber& operator+(RationalNumber& other) {
         int lcd = getLCD(this->denominator, other.denominator);
 
+        this->numerator = this->numerator * lcd / this->denominator;
+        other.numerator = other.numerator * lcd / other.denominator;
 
+        this->denominator = lcd;
+        other.denominator = lcd;
+
+        this->numerator += other.numerator;
+
+        this->normalize();
+        other.normalize();
+        cout << "Overloaded + operator fired!!!" << endl;
+        return *this;
+    }
+
+    RationalNumber& operator-(RationalNumber& other) {
+        int lcd = getLCD(this->denominator, other.denominator);
+
+        this->numerator -= other.numerator;
+
+        this->normalize();
+        other.normalize();
+        cout << "Overloaded - operator fired!!!" << endl;
         return *this;
     }
 
@@ -282,12 +307,22 @@ int main() {
 //            cout << endl;
 //    }
 
-    int i = 6;
-    int j = 3;
+    string rn = "1/-3";
+    RationalNumber rn1(rn);
+    RationalNumber rn2(2, 5);
 
-    int k = RationalNumber::getLCD(i, j);
+    cout << rn1 << endl;
+    cout << rn2 << endl;
 
-    cout << k << endl;
+    rn1 + rn2;
+    cout << rn1 << endl;
+
+//    int i = 14;
+//    int j = 3;
+//
+//    int k = RationalNumber::getLCD(i, j);
+//
+//    cout << k << endl;
 
 //    int input = 0;
 //    while (true) {
