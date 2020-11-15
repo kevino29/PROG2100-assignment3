@@ -178,6 +178,12 @@ public:
         return *this;
     }
 
+    bool operator==(RationalNumber& other) const {
+        return ((this->numerator == other.getNumerator()) && (this->denominator == other.getDenominator()));
+    }
+
+    friend bool operator>(RationalNumber rn1, RationalNumber rn2);
+    friend bool operator<(RationalNumber rn1, RationalNumber rn2);
     friend ostream& operator<<(ostream& os, RationalNumber& rn);
 
     static bool isInteger(string& input) {
@@ -231,6 +237,16 @@ public:
         return parsedString;
     }
 };
+
+bool operator>(RationalNumber rn1, RationalNumber rn2) {
+    rn1 - rn2;
+    return (rn1.getNumerator() > 0);
+}
+
+bool operator<(RationalNumber rn1, RationalNumber rn2) {
+    rn1 - rn2;
+    return (rn1.getNumerator() < 0);
+}
 
 ostream& operator<<(ostream& os, RationalNumber& rn) {
     os << rn.toString() << endl;
@@ -311,7 +327,7 @@ int main() {
 //            cout << endl;
 //    }
 
-    string rn = "3/-5";
+    string rn = "-2/-4";
     RationalNumber rn1(rn);
     RationalNumber rn2(0);
 
