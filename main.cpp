@@ -163,7 +163,6 @@ public:
         this->numerator *= other.numerator;
         this->denominator *= other.denominator;
         this->normalize();
-        this->isZero = this->checkForNumerator();
 
         cout << "Overloaded * operator fired!!!" << endl;
         return *this;
@@ -174,7 +173,6 @@ public:
             this->numerator *= other.denominator;
             this->denominator *= other.numerator;
             this->normalize();
-            this->isZero = this->checkForNumerator();
         }
         else {
             cout << "Division by zero." << endl;
@@ -320,7 +318,7 @@ void program() {
     rn3 + rn4;
     cout << rn1 << " + " << rn2 << " = " << rn3 << "\n" << endl;
 
-    // subtract both rational numbers
+    // subtract rn2 from rn1
     rn3 = rn1;
     rn4 = rn2;
     rn3 - rn4;
@@ -332,13 +330,14 @@ void program() {
     rn3 * rn4;
     cout << rn1 << " * " << rn2 << " = " << rn3 << "\n" << endl;
 
-    // divide both rational numbers
+    // divide rn1 by rn2
     rn3 = rn1;
     rn4 = rn2;
     rn3 / rn4;
     cout << rn1 << " / " << rn2 << " = " << rn3 << "\n" << endl;
 
     cout << boolalpha;
+
     // check if first rational number is greater than the second
     boolean = rn1 > rn2;
     cout << rn1 << " > " << rn2 << " : " << boolean << "\n" << endl;
@@ -365,42 +364,5 @@ int main() {
         else
             cout << endl;
     }
-
-//    string rn = "1/2";
-//    RationalNumber rn1(rn);
-//    RationalNumber rn2(3, 7);
-//
-//    cout << rn1 << endl;
-//    cout << rn2 << endl;
-//
-////    rn1 / rn2;
-////    cout << rn1 << endl;
-//
-//    if (rn1 > rn2)
-//        cout << rn1 << " is greater than " << rn2 << endl;
-//    else
-//        cout << rn2 << " is greater than " << rn1 << endl;
-
-//    int i = 14;
-//    int j = 3;
-//
-//    int k = RationalNumber::getLCD(i, j);
-//
-//    cout << k << endl;
-
-//    int input = 0;
-//    while (true) {
-//        // source: https://stackoverflow.com/questions/16934183/integer-validation-for-input
-//        cout << "Enter an integer: " << endl;
-//        cin >> input;
-//
-//        if (cin.good())
-//            break;
-//        else {
-//            cin.clear();
-//            cin.ignore(numeric_limits<streamsize>::max(),'\n');
-//            cout << "Invalid input. Please try again." << endl;
-//        }
-//    }
     return 0;
 }
