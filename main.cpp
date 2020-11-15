@@ -303,7 +303,9 @@ void program() {
         }
         else { // this means that the user gave a fraction
             if (!RationalNumber::isInteger(numbers[0]) || !RationalNumber::isInteger(numbers[1]))
-                continue; //checks if the two numbers are integers
+                continue; // checks if the two numbers are integers
+            if (stoi(numbers[1]) == 0)
+                continue; // checks if the denominator is zero
             rn1 = RationalNumber(stoi(numbers[0]), stoi(numbers[1]));
         }
         break;
@@ -324,7 +326,9 @@ void program() {
         }
         else {
             if (!RationalNumber::isInteger(numbers[0]) || !RationalNumber::isInteger(numbers[1]))
-                continue; //checks if the two numbers are integers
+                continue; // checks if the two numbers are integers
+            if (stoi(numbers[1]) == 0)
+                continue; // checks if the denominator is zero
             rn2 = RationalNumber(rn);
         }
         break;
