@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <limits>
 
 using namespace std;
 
@@ -121,18 +120,30 @@ public:
     }
 
     string toString() const {
-        string output = to_string(this->numerator) + "/" + to_string(this->denominator);
-        return output;
+        if (this->isZero)
+            return to_string(this->numerator);
+        if (this->denominator == 1)
+            return to_string(this->numerator);
+        if (this->denominator != 1) {
+            string output = to_string(this->numerator) + "/" + to_string(this->denominator);
+            return output;
+        }
+
+        return "Stub!";
     }
 
     RationalNumber& operator+(RationalNumber& other) {
-        int lcd = getLCD(this->denominator, other.denominator);
+        int lcd = 1;
 
-        this->numerator = this->numerator * lcd / this->denominator;
-        other.numerator = other.numerator * lcd / other.denominator;
+        if (this->denominator != other.getDenominator()) {
+            lcd = getLCD(this->denominator, other.denominator);
 
-        this->denominator = lcd;
-        other.denominator = lcd;
+            this->numerator = this->numerator * lcd / this->denominator;
+            other.numerator = other.numerator * lcd / other.denominator;
+
+            this->denominator = lcd;
+            other.denominator = lcd;
+        }
 
         this->numerator += other.numerator;
 
@@ -143,13 +154,17 @@ public:
     }
 
     RationalNumber& operator-(RationalNumber& other) {
-        int lcd = getLCD(this->denominator, other.denominator);
+        int lcd = 1;
 
-        this->numerator = this->numerator * lcd / this->denominator;
-        other.numerator = other.numerator * lcd / other.denominator;
+        if (this->denominator != other.getDenominator()) {
+            lcd = getLCD(this->denominator, other.denominator);
 
-        this->denominator = lcd;
-        other.denominator = lcd;
+            this->numerator = this->numerator * lcd / this->denominator;
+            other.numerator = other.numerator * lcd / other.denominator;
+
+            this->denominator = lcd;
+            other.denominator = lcd;
+        }
 
         this->numerator -= other.numerator;
 
