@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "E:/Second_Year/First_Semester/Programming C++/Assignments/assignment3/RationalNumber.cpp" "E:/Second_Year/First_Semester/Programming C++/Assignments/assignment3/cmake-build-debug/CMakeFiles/assignment3.dir/RationalNumber.cpp.obj"
   "E:/Second_Year/First_Semester/Programming C++/Assignments/assignment3/main.cpp" "E:/Second_Year/First_Semester/Programming C++/Assignments/assignment3/cmake-build-debug/CMakeFiles/assignment3.dir/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

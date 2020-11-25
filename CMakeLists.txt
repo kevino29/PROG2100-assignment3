@@ -3,4 +3,4 @@ project(assignment3)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(assignment3 main.cpp)
+add_executable(assignment3 main.cpp RationalNumber.cpp RationalNumber.h)

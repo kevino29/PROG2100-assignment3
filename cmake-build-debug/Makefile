@@ -142,6 +142,33 @@ assignment3/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\assignment3.dir\build.make CMakeFiles/assignment3.dir/build
 .PHONY : assignment3/fast
 
+RationalNumber.obj: RationalNumber.cpp.obj
+
+.PHONY : RationalNumber.obj
+
+# target to build an object file
+RationalNumber.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\assignment3.dir\build.make CMakeFiles/assignment3.dir/RationalNumber.cpp.obj
+.PHONY : RationalNumber.cpp.obj
+
+RationalNumber.i: RationalNumber.cpp.i
+
+.PHONY : RationalNumber.i
+
+# target to preprocess a source file
+RationalNumber.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\assignment3.dir\build.make CMakeFiles/assignment3.dir/RationalNumber.cpp.i
+.PHONY : RationalNumber.cpp.i
+
+RationalNumber.s: RationalNumber.cpp.s
+
+.PHONY : RationalNumber.s
+
+# target to generate assembly for a file
+RationalNumber.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\assignment3.dir\build.make CMakeFiles/assignment3.dir/RationalNumber.cpp.s
+.PHONY : RationalNumber.cpp.s
+
 main.obj: main.cpp.obj
 
 .PHONY : main.obj
@@ -178,6 +205,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... assignment3
+	@echo ... RationalNumber.obj
+	@echo ... RationalNumber.i
+	@echo ... RationalNumber.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

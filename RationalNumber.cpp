@@ -238,7 +238,7 @@ bool RationalNumber::operator==(RationalNumber& other) const {
 /// Checks if the value is an integer.
 /// \return True if the value is an integer.
 /// \return False if the value is not an integer.
-static bool isInteger(string& input) {
+bool isInteger(string& input) {
     //source: https://www.programiz.com/cpp-programming/library-function/cctype/isdigit
     for (char c : input) {
         if (c == '-' || c == '+')
@@ -251,7 +251,7 @@ static bool isInteger(string& input) {
 
 /// Gets the Least Common Denominator of two denominator values.
 /// \return The LCD as an integer.
-static int getLCD(int denominator1, int denominator2) {
+int getLCD(int denominator1, int denominator2) {
     int higherNum = 0;
     int lowerNum = 0;
     int lcd = 1;
@@ -278,7 +278,7 @@ static int getLCD(int denominator1, int denominator2) {
 
 /// Parses the string into a vector of string.
 /// \return The parsed string as a string vector.
-static vector<string> parseString(string& rationalNumber) {
+vector<string> parseString(string& rationalNumber) {
     // source: https://stackoverflow.com/questions/14265581/parse-split-a-string-in-c-using-string-delimiter-standard-c
     vector<string> parsedString;
     string delimiter = "/";

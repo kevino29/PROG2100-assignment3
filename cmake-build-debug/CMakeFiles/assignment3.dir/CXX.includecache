@@ -6,6 +6,18 @@
 
 #IncludeRegexTransform: 
 
+E:/Second_Year/First_Semester/Programming C++/Assignments/assignment3/RationalNumber.cpp
+iostream
+-
+RationalNumber.h
+E:/Second_Year/First_Semester/Programming C++/Assignments/assignment3/RationalNumber.h
+
+E:/Second_Year/First_Semester/Programming C++/Assignments/assignment3/RationalNumber.h
+string
+-
+vector
+-
+
 E:/Second_Year/First_Semester/Programming C++/Assignments/assignment3/main.cpp
 iostream
 -
@@ -13,4 +25,6 @@ string
 -
 vector
 -
+RationalNumber.h
+E:/Second_Year/First_Semester/Programming C++/Assignments/assignment3/RationalNumber.h
 

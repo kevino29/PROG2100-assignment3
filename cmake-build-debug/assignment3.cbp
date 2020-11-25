@@ -80,6 +80,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="E:/Second_Year/First_Semester/Programming C++/Assignments/assignment3/RationalNumber.cpp">
+			<Option target="assignment3"/>
+		</Unit>
+		<Unit filename="E:/Second_Year/First_Semester/Programming C++/Assignments/assignment3/RationalNumber.h">
+			<Option target="assignment3"/>
+		</Unit>
 		<Unit filename="E:/Second_Year/First_Semester/Programming C++/Assignments/assignment3/main.cpp">
 			<Option target="assignment3"/>
 		</Unit>
